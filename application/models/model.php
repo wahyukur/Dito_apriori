@@ -13,4 +13,14 @@ class Model extends CI_Model {
 		return $this->db->get($table);
 	}
 
+	public function getMenu() {
+		$this->db->order_by('nama_menu', 'asc');
+		$query = $this->db->get('menu');
+		return $query;
+	}
+
+	public function storeData($table, $data){
+		$this->db->insert($table, $data);
+	}
+
 }

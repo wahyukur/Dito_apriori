@@ -16,6 +16,7 @@
 
 	<!-- Custom styles for this template-->
 	<link href="<?php echo base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
+	<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
 
 	<!-- Custom styles for this page -->
 	<link href="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
@@ -42,26 +43,39 @@
 					<span>Dashboard</span>
 				</a>
 			</li>
-
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url('index.php/order') ?>">
+					<i class="fas fa-fw fa-clipboard-list"></i>
+					<span>Order</span>
+				</a>
+			</li>
 			<!-- Divider -->
 			<hr class="sidebar-divider">
 			<!-- Heading -->
 			<div class="sidebar-heading">
 				Master
 			</div>
-
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo base_url('index.php/menu') ?>">
 					<i class="fas fa-fw fa-mug-hot"></i>
 					<span>Daftar Menu</span>
 				</a>
 			</li>
-
-
-
-			<!-- Divider -->
-			<!-- <hr class="sidebar-divider"> -->
-
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url('index.php/menu') ?>">
+					<i class="fas fa-fw fa-box-open"></i>
+					<span>Daftar Paket</span>
+				</a>
+			</li>
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo base_url('index.php/order') ?>">
+					<i class="fas fa-fw fa-clipboard-list"></i>
+					<span>Buat Paket</span>
+				</a>
+			</li>
 
 
 			<!-- Divider -->
@@ -85,31 +99,12 @@
 					</button>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-						<li class="nav-item dropdown no-arrow d-sm-none">
-							<a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-search fa-fw"></i>
-							</a>
-							<!-- Dropdown - Messages -->
-							<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-								<form class="form-inline mr-auto w-100 navbar-search">
-									<div class="input-group">
-										<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-										<div class="input-group-append">
-											<button class="btn btn-primary" type="button">
-												<i class="fas fa-search fa-sm"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</li>
 						<div class="topbar-divider d-none d-sm-block"></div>
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-								<img class="img-profile rounded-circle" src="<?php echo base_url('assets/img/gear.png') ?>">
+								<img class="img-profile rounded-circle" src="<?php echo base_url('assets/img/settings.png') ?>">
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -137,11 +132,6 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                	<!-- Page Heading -->
-                	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-                		<h1 class="h3 mb-0 text-gray-800"><?php echo $page; ?></h1>
-                		<!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                	</div>
 
                 	<!-- CONTENT -->
                 	<?php 
@@ -201,8 +191,13 @@
 	<!-- Page level plugins -->
 	<script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js') ?>"></script>
 
 	<!-- Page level custom scripts -->
 	<script src="<?php echo base_url('assets/js/demo/datatables-demo.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/demo/chart-area-demo.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js') ?>"></script>
+
+	<script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 </body>
 </html>
