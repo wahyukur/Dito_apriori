@@ -1,12 +1,12 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><?php echo $page; ?></h1>
+</div>
 <!-- Content Row -->
 <div class="row">
     <div class="col-8">
         <h1 class="h3 text-gray-800"> > > > Minuman</h1>
         <div class="row">
             <?php
-                $no = 1;
-                $no_min = 1;
-                $no_plu = 1;
                 foreach ($item as $data) {
                     if ($data->kategori == 1) {
             ?>
@@ -18,11 +18,11 @@
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled" data-type="minus" data-field="quant[<?php echo $no_min++ ?>]">-</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled" data-type="minus" data-field="<?php echo $data->kode ?>">-</button>
                                         </div>
-                                        <input type="text" id="qty" name="quant[<?php echo $no++ ?>]" class="form-control input-number" value="0" min="0" max="10">
+                                        <input type="text" id="qty" name="<?php echo $data->kode ?>" class="form-control input-number" value="0" min="0" max="10">
                                         <div class="input-group-append">
-                                            <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus" data-field="quant[<?php echo $no_plu++ ?>]">+</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus" data-field="<?php echo $data->kode ?>">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,11 @@
             ?>
         </div>
     </div>
-    <div class="col-4" style="border-left: 1px solid black">
-        Detail Pesanan
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Detail Pesanan</h5>
+            </div>
+        </div>
     </div>
 </div>

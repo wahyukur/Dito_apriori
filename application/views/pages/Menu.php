@@ -47,15 +47,12 @@
                         <td><?php echo $data->harga ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="#" class="btn btn-warning">
+                                <a href="<?php echo base_url('index.php/menu/edit/'.$data->id_menu) ?>" class="btn btn-warning">
                                     <i class="fas fa-edit fa-sm"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger">
+                                <a href="<?php echo base_url('index.php/menu/delete/'.$data->id_menu) ?>" class="btn btn-danger">
                                     <i class="fas fa-trash fa-sm"></i>
                                 </a>
-                                <!-- <a href="" class="btn btn-secondary">
-                                    <i class="fas fa-plus-circle fa-sm text-white-50"></i>
-                                </a> -->
                             </div>
                         </td>
                     </tr>
