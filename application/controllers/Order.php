@@ -13,9 +13,26 @@ class Order extends CI_Controller {
 	public function index()
 	{
 		$data['page'] = 'Order Here'; 
+		$data['kategori'] = $this->model->getAll('menu_grup')->result();
 		$data['item'] = $this->model->getMenu()->result();
-		$data['content'] = 'pages/OrderCoba';
+		$data['content'] = 'pages/OrderCobaAjax';
 		$this->load->view('template/main', $data);
+	}
+	public function select($get)
+	{
+		if ($get == null) {
+			$data['page'] = 'Order Here'; 
+			$data['kategori'] = $this->model->getAll('menu_grup')->result();
+			$data['item'] = $this->model->getMenu()->result();
+			$data['content'] = 'pages/OrderCobaAjax';
+			$this->load->view('template/main', $data);
+		} else {
+			$data['page'] = 'Order Here'; 
+			$data['kategori'] = $this->model->getAll('menu_grup')->result();
+			$data['item'] = $this->model->getData('menu', ['id_group' => $get])->result();
+			$data['content'] = 'pages/OrderCobaAjax';
+			$this->load->view('template/main', $data);
+		}
 	}
 
 	function add_to_cart(){ 

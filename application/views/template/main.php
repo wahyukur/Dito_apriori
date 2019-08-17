@@ -68,14 +68,14 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url('index.php/menu') ?>">
+				<a class="nav-link" href="<?php echo base_url('index.php/kategori') ?>">
 					<i class="fas fa-fw fa-box-open"></i>
-					<span>Daftar Paket</span>
+					<span>Daftar Kategori</span>
 				</a>
 			</li>
 			<hr class="sidebar-divider my-0">
 			<li class="nav-item">
-				<a class="nav-link" href="<?php echo base_url('index.php/order') ?>">
+				<a class="nav-link" href="<?php echo base_url('index.php/apriori') ?>">
 					<i class="fas fa-fw fa-clipboard-list"></i>
 					<span>Buat Paket</span>
 				</a>
@@ -112,19 +112,6 @@
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<!-- <a class="dropdown-item" href="#">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Profile
-								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
-								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Activity Log
-                				</a>
-                				<div class="dropdown-divider"></div> -->
                 				<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 					Logout
@@ -139,8 +126,6 @@
 
                 	<!-- CONTENT -->
                 	<?php 
-                		// $path = './application/views/pages/';
-                		// include $path.$page.'.php';
                 		$this->load->view($content);
                 	?>
                 </div>
@@ -202,69 +187,82 @@
 	<script src="<?php echo base_url('assets/js/demo/chart-area-demo.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js') ?>"></script>
 	<script src="<?php echo base_url('assets/OwlCarousel2/dist/owl.carousel.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/script.js') ?>"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
-    $('.add_cart').click(function(){
-        console.log('hello');
-        var product_id    = $(this).data("productid");
-        var product_name  = $(this).data("productname");
-        var product_price = $(this).data("productprice");
-        var quantity      = $('#' + product_id).val();
-        $.ajax({
-            url : "<?php echo base_url('index.php/order/add_to_cart');?>",
-            method : "POST",
-            data : {
-                product_id: product_id, 
-                product_name: product_name, 
-                product_price: product_price, 
-                quantity: quantity
-            },
-            success: function(data){
-                // let datas = JSON.parse(data);
-                // console.log(data);
-                $('#detail_cart').html(data);
-            }
-        });
-    });
 
-     
-    $('#detail_cart').load("<?php echo base_url('index.php/order/load_cart');?>");
+			$('.add_cart').click(function(){
+				console.log('hello');
+		        var product_id    = $(this).data("productid");
+		        var product_name  = $(this).data("productname");
+		        var product_price = $(this).data("productprice");
+		        var quantity      = $('#' + product_id).val();
+		        $.ajax({
+		        	url : "<?php echo base_url('index.php/order/add_to_cart');?>",
+		        	method : "POST",
+		        	data : {
+		        		product_id: product_id, 
+		                product_name: product_name, 
+		                product_price: product_price, 
+		                quantity: quantity
+		            },
+			        success: function(data){
+	                	$('#detail_cart').html(data);
+	                }
+	            });
+		    });
 
-     
-    $(document).on('click','.romove_cart',function(){
-        var row_id=$(this).attr("id"); 
-        $.ajax({
-            url : "<?php echo site_url('order/delete_cart');?>",
-            method : "POST",
-            data : {row_id : row_id},
-            success :function(data){
-                $('#detail_cart').html(data);
-            }
-        });
-    });
+		    $('#detail_cart').load("<?php echo base_url('index.php/order/load_cart');?>");
 
-    $(document).ready(function(){
-    	$(".owl-carousel").owlCarousel({
-    		margin: 10,
-    		nav: true,
-    		responsive:{
-		        0:{
-		            items:1
-		        },
-		        600:{
-		            items:2
-		        },            
-		        960:{
-		            items:3
-		        },
-		        1200:{
-		            items:4
-		        }
-		    }
-    	});
-    });
-});
+		    $(document).on('click','.romove_cart',function(){
+		    	var row_id=$(this).attr("id"); 
+		    	$.ajax({
+		    		url : "<?php echo site_url('order/delete_cart');?>",
+		    		method : "POST",
+		    		data : {row_id : row_id},
+		    		success :function(data){
+		    			$('#detail_cart').html(data);
+		    		}
+		    	});
+		    });
+
+		    $(document).ready(function(){
+		    	$(".owl-carousel").owlCarousel({
+		    		margin: 10,
+		    		nav: true,
+		    		responsive:{
+		    			0:{
+		    				items:1
+		    			},
+		    			600:{
+		    				items:2
+		    			},
+		    			960:{
+		    				items:3
+		    			},
+		    			1200:{
+		    				items:4
+		    			}
+		    		}
+		    	});
+		    });
+
+		    $(document).on("click", ".open-AddBookDialog", function () {
+				var id_assoc = $(this).data('id');
+				$(".modal-body #bookId").val( id_assoc );
+				let url = "<?php echo site_url('apriori/fajar/');?>"
+				$.ajax({
+		    		url : url+id_assoc,
+		    		method : "GET",
+		    		success :function(data){
+		    			data = JSON.parse(data);
+		    			$('#total_tod').val(data.data.total);
+		    			console.log(data);
+		    			// $()
+		    		}
+		    	});
+			});
+		});
 	</script>
 </body>
 </html>

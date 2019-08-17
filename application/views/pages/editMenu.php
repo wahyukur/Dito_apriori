@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <form action="<?php echo base_url('index.php/menu/update') ?>" method="post">
+        <form action="<?php echo base_url('index.php/menu/update') ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id_menu" value="<?php echo $item->id_menu ?>">
             <div class="form-group">
                 <label>Nama Menu</label>
@@ -11,25 +11,15 @@
                 <input type="text" name="kode" class="form-control" value="<?php echo $item->kode ?>">
             </div>
             <div class="form-group">
-                <label>Kategori</label>
-                <select name="kategori" class="form-control" id="exampleFormControlSelect1">
-                    <option value="<?php echo $item->id_menu ?>">
-                        <?php 
-                        if ($item->kategori == 1) {
-                            echo "Minuman";
-                        } else {
-                            echo "Cemilan";
-                        }
-                        ?>
-                    </option>
-                    <option value="">-- Kategori --</option>
-                    <option value="1">Minuman</option>
-                    <option value="2">Cemilan</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <label>Harga</label>
                 <input type="number" name="harga" class="form-control" value="<?php echo $item->harga ?>">
+            </div>
+            <div class="custom-file">
+                <input type="file" name="photo_menu" class="custom-file-input" id="customFile" value="<?php echo $item->gambar ?>">
+                <label class="custom-file-label" for="customFile"><?php echo $item->gambar ?></label>
+            </div>
+            <div style="width: 150px" class="my-3">
+                <img src="<?php echo base_url($item->gambar) ?>" class="img-thumbnail">
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
             <a class="btn btn-secondary" href="<?php echo base_url('index.php/menu') ?>">Cancel</a>

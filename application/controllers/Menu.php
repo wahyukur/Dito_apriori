@@ -12,16 +12,28 @@ class Menu extends CI_Controller {
 	}
 
 	public function store(){
-		$data = [
-			'nama_menu' => $this->input->post('nama_menu'),
-			'kode' => $this->input->post('kode'),          
-			'kategori' => $this->input->post('kategori'),  
-			'harga' => $this->input->post('harga')         
-		];
+		$config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 1000;
+		$config['file_name']    		= base64_encode("" . mt_rand());
+		
+		$this->load->library('upload', $config);
 
-		$this->model->storeData('menu', $data);
+		if ( ! $this->upload->do_upload('photo_menu')) {
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+        } else {
+        	$data = [
+        		'nama_menu' => $this->input->post('nama_menu'),
+				'kode' => $this->input->post('kode'),
+				'harga' => $this->input->post('harga'),
+				'gambar' => '/uploads/'.$this->upload->data()['file_name']
+			];
 
-		redirect(base_url('index.php/menu'));
+			$this->model->storeData('menu', $data);
+
+			redirect(base_url('index.php/menu'));
+        }
 	}
 
 	public function edit($id){
@@ -33,17 +45,29 @@ class Menu extends CI_Controller {
 
 	public function update(){
 		$id = $this->input->post('id_menu');
-		$data = [
-			'id_menu' => $id,
-			'nama_menu' => $this->input->post('nama_menu'),
-			'kode' => $this->input->post('kode'),
-			'kategori' => $this->input->post('kategori'),
-			'harga' => $this->input->post('harga')
-		];
 
-		$this->model->updateData('menu', ['id_menu'=>$id], $data);
+		$config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 1000;
+		$config['file_name']    		= base64_encode("" . mt_rand());
+		
+		$this->load->library('upload', $config);
 
-		redirect(base_url('index.php/menu'));
+		if ( ! $this->upload->do_upload('photo_menu')) {
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+        } else {
+        	$data = [
+        		'nama_menu' => $this->input->post('nama_menu'),
+				'kode' => $this->input->post('kode'),
+				'harga' => $this->input->post('harga'),
+				'gambar' => '/uploads/'.$this->upload->data()['file_name']
+			];
+
+			$this->model->updateData('menu', ['id_menu'=>$id], $data);
+
+			redirect(base_url('index.php/menu'));
+        }
 	}
 
 	public function delete($id){

@@ -1,7 +1,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800"><?php echo $page; ?></h1>
     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#inputMenu">
-        <i class="fas fa-plus-circle fa-sm text-white-50"></i> Input Menu
+        <i class="fas fa-plus-circle fa-sm text-white-50"></i> Input Kategori
     </a>
 </div>
 <div class="card shadow mb-4">
@@ -11,9 +11,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama Menu</th>
-                        <th>Kode Menu</th>
-                        <th>Harga</th>
+                        <th>Nama Group</th>
                         <th>Gambar</th>
                         <th></th>
                     </tr>
@@ -21,9 +19,7 @@
                 <tfoot>
                     <tr>
                         <th>No.</th>
-                        <th>Nama Menu</th>
-                        <th>Kode Menu</th>
-                        <th>Harga</th>
+                        <th>Nama Group</th>
                         <th>Gambar</th>
                         <th></th>
                     </tr>
@@ -35,18 +31,16 @@
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $data->nama_menu ?></td>
-                        <td><?php echo $data->kode ?></td>
-                        <td><?php echo $data->harga ?></td>
-                        <td style="width: 125px">
-                            <img src="<?php echo base_url($data->gambar) ?>" class="img-thumbnail">
+                        <td><?php echo $data->nama_menu_group ?></td>
+                        <td style="width: 150px">
+                            <img src="<?php echo base_url($data->gambar_group) ?>" class="img-thumbnail">
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="<?php echo base_url('index.php/menu/edit/'.$data->id_menu) ?>" class="btn btn-warning">
+                                <a href="<?php echo base_url('index.php/kategori/edit/'.$data->id_group) ?>" class="btn btn-warning">
                                     <i class="fas fa-edit fa-sm"></i>
                                 </a>
-                                <a href="<?php echo base_url('index.php/menu/delete/'.$data->id_menu) ?>" class="btn btn-danger">
+                                <a href="<?php echo base_url('index.php/kategori/delete/'.$data->id_group) ?>" class="btn btn-danger">
                                     <i class="fas fa-trash fa-sm"></i>
                                 </a>
                             </div>
@@ -66,28 +60,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Masukkan Data Menu</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Masukkan Data Kategori</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo base_url('index.php/menu/store') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url('index.php/kategori/store') ?>" method="post" enctype="multipart/form-data">
                 <!-- <input type="hidden" name="id_menu" value=""> -->
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nama Menu</label>
-                        <input type="text" name="nama_menu" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Kode</label>
-                        <input type="text" name="kode" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Harga</label>
-                        <input type="number" name="harga" class="form-control">
+                        <label>Nama Menu Group</label>
+                        <input type="text" name="nama_menu_group" class="form-control">
                     </div>
                     <div class="custom-file">
-                        <input type="file" name="photo_menu" class="custom-file-input" id="customFile">
+                        <input type="file" name="photo_kat" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Upload Foto</label>
                     </div>
                 </div>
