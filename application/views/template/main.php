@@ -20,6 +20,10 @@
 
 	<!-- Custom styles for this page -->
 	<link href="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/OwlCarousel2/dist/assets/owl.carousel.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/OwlCarousel2/dist/assets/owl.theme.default.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/OwlCarousel2/dist/assets/owl.theme.green.min.css') ?>">
 </head>
 
 <body id="page-top">
@@ -197,7 +201,70 @@
 	<script src="<?php echo base_url('assets/js/demo/datatables-demo.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/demo/chart-area-demo.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js') ?>"></script>
-
+	<script src="<?php echo base_url('assets/OwlCarousel2/dist/owl.carousel.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/script.js') ?>"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+    $('.add_cart').click(function(){
+        console.log('hello');
+        var product_id    = $(this).data("productid");
+        var product_name  = $(this).data("productname");
+        var product_price = $(this).data("productprice");
+        var quantity      = $('#' + product_id).val();
+        $.ajax({
+            url : "<?php echo base_url('index.php/order/add_to_cart');?>",
+            method : "POST",
+            data : {
+                product_id: product_id, 
+                product_name: product_name, 
+                product_price: product_price, 
+                quantity: quantity
+            },
+            success: function(data){
+                // let datas = JSON.parse(data);
+                // console.log(data);
+                $('#detail_cart').html(data);
+            }
+        });
+    });
+
+     
+    $('#detail_cart').load("<?php echo base_url('index.php/order/load_cart');?>");
+
+     
+    $(document).on('click','.romove_cart',function(){
+        var row_id=$(this).attr("id"); 
+        $.ajax({
+            url : "<?php echo site_url('order/delete_cart');?>",
+            method : "POST",
+            data : {row_id : row_id},
+            success :function(data){
+                $('#detail_cart').html(data);
+            }
+        });
+    });
+
+    $(document).ready(function(){
+    	$(".owl-carousel").owlCarousel({
+    		margin: 10,
+    		nav: true,
+    		responsive:{
+		        0:{
+		            items:1
+		        },
+		        600:{
+		            items:2
+		        },            
+		        960:{
+		            items:3
+		        },
+		        1200:{
+		            items:4
+		        }
+		    }
+    	});
+    });
+});
+	</script>
 </body>
 </html>

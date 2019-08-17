@@ -4,6 +4,40 @@
 <!-- Content Row -->
 <div class="row">
     <div class="col-8">
+        <nav class="nav" style="width: 100%">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="nav-link active" href="#">Active</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="nav-link" href="#">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="nav-link active" href="#">Active</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="nav-link" href="#">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <h1 class="h3 text-gray-800"> > > > Minuman</h1>
         <div class="row">
             <?php

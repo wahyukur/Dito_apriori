@@ -10,12 +10,11 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="width: 5%;">No.</th>
-                        <th style="width: 50%;">Nama Menu</th>
-                        <th style="width: 15%;">Kode Menu</th>
-                        <th style="width: 10%;">Kategori</th>
-                        <th style="width: 10%;">Harga</th>
-                        <th style="width: 10%;"></th>
+                        <th>No.</th>
+                        <th>Nama Menu</th>
+                        <th>Kode Menu</th>
+                        <th>Harga</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -23,7 +22,6 @@
                         <th>No.</th>
                         <th>Nama Menu</th>
                         <th>Kode Menu</th>
-                        <th>Kategori</th>
                         <th>Harga</th>
                         <th></th>
                     </tr>
@@ -37,13 +35,6 @@
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $data->nama_menu ?></td>
                         <td><?php echo $data->kode ?></td>
-                        <td><?php 
-                            if ($data->kategori == 1) {
-                                echo "Minuman";
-                            } else {
-                                echo "Cemilan";
-                            }
-                        ?></td>
                         <td><?php echo $data->harga ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
