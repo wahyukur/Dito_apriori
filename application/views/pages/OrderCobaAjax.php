@@ -57,8 +57,8 @@
                 <tbody id="detail_cart">
 
                 </tbody>
-                 
             </table>
+            <a href="<?php echo base_url('index.php/order/checkout') ?>" class="btn btn-primary">Checkout</a>
         </div>
     </div>
 </div>

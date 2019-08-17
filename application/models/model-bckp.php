@@ -93,7 +93,7 @@ class Model extends CI_Model {
 	public function get_detail_assoc($id) {
 		$this->db->select('a.nama_menu');
 		$this->db->from('menu a');
-		$this->db->join('temp_assoc_detail b', 'b.id_menu = a.id_menu', 'left');
+		$this->db->join('temp_assoc_detail b', 'b.kode = a.kode', 'left');
 		$this->db->where('b.id_assoc', $id);
 		return $this->db->get();
 	}

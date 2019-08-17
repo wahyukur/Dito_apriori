@@ -82,4 +82,31 @@ class Order extends CI_Controller {
 	    $this->cart->update($data);
 	    echo $this->show_cart();
 	}
+
+	public function checkout() {
+		$last_id = $this->model->last_detail_id()->row();
+		// var_dump($last_id);die();
+		if ($cart = $this->cart->contents()) {
+			$tran = [
+				'ammount' => $this->cart->total(),
+				'tgl_trans' => date("Y-m-d")
+			];
+			$this->model->storeData('transaksi', $tran);
+			foreach ($cart as $key) {
+				$data = [
+					'id_trans' => (int)$last_id->id_trans+1,
+					'id_menu' => $key['id'],
+					'qty' => $key['qty'],
+					'total' => $key['subtotal']
+				];
+				// echo "<pre>";
+				// var_dump($data);
+				$this->model->storeData('detail_trans', $data);
+			}
+			$this->cart->destroy();
+			redirect(base_url('index.php/order'));
+		} else {
+			redirect(base_url('index.php/order'));
+		}
+	}
 }
