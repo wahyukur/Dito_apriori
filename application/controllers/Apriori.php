@@ -77,30 +77,28 @@ class Apriori extends CI_Controller {
 			$id = $key->id_trans;
 			$jml = $this->model->get_menu($id)->result();
 			foreach ($jml as $menu) {
-				$id_menu[] = $menu->id_menu;
+				$kode[] = $menu->kode;
 				$arr[] = $menu->nama_menu;
 			}
 			array_push($dataset, [
 				'id' => $id,
-				'tags' => $id_menu,
+				'tags' => $kode,
 				'menu' => $arr
 			]);
-			unset($id_menu);
+			unset($kode);
 			unset($arr); // menghapus array yang bernilai sama
 		}
 
 		$in = $this->model->get_input()->result();
 		foreach ($in as $a) {
 			# code...
-			$inputan[] = $a->id_menu;
+			$inputan[] = $a->kode;
 		}
 
 		$data = [
 			'input' => $inputan,
 			'dataset' => $dataset 
 		];
-		echo "<pre>";
-		var_dump($data);die();
 
 		return $data;
 	}
