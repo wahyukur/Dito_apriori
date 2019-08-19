@@ -77,22 +77,22 @@ class Apriori extends CI_Controller {
 			$id = $key->id_trans;
 			$jml = $this->model->get_menu($id)->result();
 			foreach ($jml as $menu) {
-				$kode[] = $menu->kode;
+				$id_menu[] = $menu->id_menu;
 				$arr[] = $menu->nama_menu;
 			}
 			array_push($dataset, [
 				'id' => $id,
-				'tags' => $kode,
+				'tags' => $id_menu,
 				'menu' => $arr
 			]);
-			unset($kode);
+			unset($id_menu);
 			unset($arr); // menghapus array yang bernilai sama
 		}
 
 		$in = $this->model->get_input()->result();
 		foreach ($in as $a) {
 			# code...
-			$inputan[] = $a->kode;
+			$inputan[] = $a->id_menu;
 		}
 
 		$data = [
@@ -335,7 +335,7 @@ class Apriori extends CI_Controller {
 				
 				$data = [
 					'id_assoc' => $k,
-					'kode' => $assoc_detail[$i]['items'][$j]
+					'id_menu' => $assoc_detail[$i]['items'][$j]
 				];					
 
 				$this->db->insert('temp_assoc_detail',$data);
@@ -358,8 +358,8 @@ class Apriori extends CI_Controller {
 		$hitung_ = $this->model->ambilID_assc($id)->result();
         $total = 0;
         foreach ($hitung_ as $k) {
-			$kode_ = $k->kode;
-			$harga_ = $this->model->harga_items($kode_)->result();
+			$id_menu_ = $k->id_menu;
+			$harga_ = $this->model->harga_items($id_menu_)->result();
 			foreach ($harga_ as $key) {
 				$total = $total + $key->harga;
 			}
@@ -373,5 +373,42 @@ class Apriori extends CI_Controller {
         ];
         // var_dump($total);
         echo json_encode($data);
+	}
+
+	public function input()
+	{
+		$config['upload_path']          = './uploads/';
+        $config['allowed_types']        = 'gif|jpg|png|PNG';
+		$config['max_size']             = 1000;
+		$config['file_name']    		= base64_encode("" . mt_rand());
+		
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('photo_menu')) {
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+        } else {
+        	$harga = $this->input->post('harga');
+        	$discount = $this->input->post('disct_');
+        	$hasil = ($harga * $discount)/100;
+        	$selisih = $harga - $hasil;
+        	$id = $this->input->post('id_assoc');
+        	$data = [
+	    		'nama_menu' => $this->input->post('nama_menu'),
+				'id_group' => $this->input->post('kategori'),
+				'id_paket' => $this->input->post('id_assoc'),
+				'harga' => $this->input->post('harga'),
+				'disct_' => $this->input->post('disct_'),
+				'gross_amount' => $selisih,
+				'gambar' => '/uploads/'.$this->upload->data()['file_name']
+			];
+
+			$this->model->storeData('menu', $data);
+			$this->model->deleteData('temp_assoc', ['id_assoc' => $id]);
+			$this->model->deleteData('temp_assoc_detail', ['id_assoc' => $id]);
+
+			redirect(base_url('index.php/apriori'));
+        }
+
 	}
 }

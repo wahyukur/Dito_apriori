@@ -18,7 +18,7 @@ class Auth extends CI_Controller {
 
 		if (!empty($login)) {
 			$this->session->set_userdata($login);
-			redirect(base_url('index.php/home'));
+			redirect(base_url('index.php/order'));
 		} else {
 			$this->session->set_flashdata('gagal', 'Username atau Password Salah');
 			redirect(base_url('index.php/auth'));

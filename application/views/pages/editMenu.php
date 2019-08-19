@@ -8,7 +8,13 @@
             </div>
             <div class="form-group">
                 <label>Kode</label>
-                <input type="text" name="kode" class="form-control" value="<?php echo $item->kode ?>">
+                <select name="id_group" class="form-control">
+                    <option value="<?php echo $item->id_group ?>"><?php echo $item->nama_menu_group; ?></option>
+                    <option value="">--Kategori--</option>
+                    <?php foreach ($grup as $key) { ?>
+                        <option value="<?php echo $key->id_group ?>"><?php echo $key->nama_menu_group; ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group">
                 <label>Harga</label>

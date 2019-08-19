@@ -13,6 +13,22 @@ class Model extends CI_Model {
 		return $this->db->get($table);
 	}
 
+	public function menuJoin() {
+		$this->db->select('M.id_menu, M.nama_menu, M.id_group, G.id_group, G.nama_menu_group, M.gross_amount, M.gambar');
+		$this->db->from('menu M');
+		$this->db->join('menu_grup G', 'M.id_group = G.id_group');
+		$this->db->order_by('G.nama_menu_group', 'asc');
+		return $this->db->get();
+	}
+
+	public function menuJoinbyId($id) {
+		$this->db->select('M.id_menu, M.nama_menu, M.id_group, M.harga, G.id_group, G.nama_menu_group, M.gross_amount, M.gambar');
+		$this->db->from('menu M');
+		$this->db->join('menu_grup G', 'M.id_group = G.id_group');
+		$this->db->where('M.id_menu', $id);
+		return $this->db->get();
+	}
+
 	public function getMenu() {
 		$this->db->order_by('nama_menu', 'asc');
 		$query = $this->db->get('menu');
@@ -77,14 +93,14 @@ class Model extends CI_Model {
 
 	// select detail trans berdasarkan id transs
 	public function get_menu($id) {
-		$this->db->select('D.id_trans,M.nama_menu,M.kode,D.qty');
+		$this->db->select('D.id_trans,M.nama_menu,M.id_menu,D.qty');
 		$this->db->from('detail_trans D');
 		$this->db->join('menu M', 'D.id_menu = M.id_menu');
 		$this->db->where('D.id_trans', $id);
 		return $this->db->get();
 	}
 	public function get_input() {
-		$this->db->select('D.id_trans, M.nama_menu, M.kode, D.qty');
+		$this->db->select('D.id_trans, M.nama_menu, M.id_menu, D.qty');
 		$this->db->from('detail_trans D');
 		$this->db->join('menu M', 'D.id_menu = M.id_menu');
 		$this->db->group_by('M.id_menu');
@@ -93,20 +109,21 @@ class Model extends CI_Model {
 	public function get_detail_assoc($id) {
 		$this->db->select('a.nama_menu');
 		$this->db->from('menu a');
-		$this->db->join('temp_assoc_detail b', 'b.kode = a.kode', 'left');
+		$this->db->join('temp_assoc_detail b', 'b.id_menu = a.id_menu', 'left');
 		$this->db->where('b.id_assoc', $id);
 		return $this->db->get();
 	}
 	public function harga_items($kode) {
 		$this->db->select('harga');
 		$this->db->from('menu');
-		$this->db->where('kode', $kode);
+		$this->db->where('id_menu', $kode);
 		return $this->db->get();
 	}
 	public function ambilID_assc($id) {
-		$this->db->select('kode');
+		$this->db->select('id_menu');
 		$this->db->from('temp_assoc_detail');
 		$this->db->where('id_assoc', $id);
 		return $this->db->get();
 	}
+
 }

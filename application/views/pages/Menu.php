@@ -12,7 +12,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Nama Menu</th>
-                        <th>Kode Menu</th>
+                        <th>Kategori</th>
                         <th>Harga</th>
                         <th>Gambar</th>
                         <th></th>
@@ -22,7 +22,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Nama Menu</th>
-                        <th>Kode Menu</th>
+                        <th>Kategori</th>
                         <th>Harga</th>
                         <th>Gambar</th>
                         <th></th>
@@ -36,8 +36,8 @@
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $data->nama_menu ?></td>
-                        <td><?php echo $data->kode ?></td>
-                        <td><?php echo $data->harga ?></td>
+                        <td><?php echo $data->nama_menu_group ?></td>
+                        <td><?php echo $data->gross_amount ?></td>
                         <td style="width: 125px">
                             <img src="<?php echo base_url($data->gambar) ?>" class="img-thumbnail">
                         </td>
@@ -79,8 +79,13 @@
                         <input type="text" name="nama_menu" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Kode</label>
-                        <input type="text" name="kode" class="form-control">
+                        <label>Kategori</label>
+                        <select name="id_group" class="form-control">
+                            <option value="">--Kategori--</option>
+                            <?php foreach ($grup as $key) { ?>
+                                <option value="<?php echo $key->id_group ?>"><?php echo $key->nama_menu_group; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Harga</label>

@@ -64,7 +64,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm open-AddBookDialog" data-toggle="modal" data-target="#inputPaket" data-id="<?php echo $data->id_assoc ?>">
-                                    <i class="fas fa-edit fa-sm"></i>
+                                    <i class="fas fa-plus fa-sm"></i>
                                 </a>
                             </div>
                         </td>
@@ -74,7 +74,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="<?php echo base_url('index.php/apriori/detail_assoc/'.$data->id_assoc) ?>" class="btn btn-warning">
-                                    <i class="fas fa-edit fa-sm"></i>
+                                    <i class="fas fa-info-circle fa-sm"></i>
                                 </a>
                             </div>
                         </td>
@@ -146,33 +146,36 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="<?php echo base_url('index.php/apriori/input') ?>" method="post">
+            <form action="<?php echo base_url('index.php/apriori/input') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="id_assoc" id="bookId">
                     <div class="form-group">
                         <label>Nama Paket</label>
-                        <input type="text" name="nama_menu" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Kode</label>
-                        <input type="text" name="kode" class="form-control">
+                        <input type="text" name="nama_menu" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Kategori</label>
-                        <select name="kategori" class="form-control" id="exampleFormControlSelect1">
+                        <select name="kategori" class="form-control" id="exampleFormControlSelect1" required>
                             <option value="">-- Kategori --</option>
                             <?php foreach ($kategori as $key) { ?>
                               <option value="<?php echo $key->id_group ?>"><?php echo $key->nama_menu_group ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Harga</label>
-                        <input type="text" id="total_tod" name="data" class="form-control" readonly>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                          <label>Harga</label>
+                          <input type="text" id="total_tod" name="harga" class="form-control" readonly>
+                      </div>
+                      <div class="col-sm-6">
                         <label>Discount</label>
-                        <input type="text" name="disct_" class="form-control">
+                        <input type="text" name="disct_" class="form-control" required>
+                      </div>
+                    </div>
+                  
+                    <div class="custom-file">
+                        <input type="file" name="photo_menu" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Upload Foto</label>
                     </div>
                 </div>
                 <div class="modal-footer">

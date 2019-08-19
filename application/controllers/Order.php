@@ -15,7 +15,7 @@ class Order extends CI_Controller {
 		$data['page'] = 'Order Here'; 
 		$data['kategori'] = $this->model->getAll('menu_grup')->result();
 		$data['item'] = $this->model->getMenu()->result();
-		$data['content'] = 'pages/OrderCobaAjax';
+		$data['content'] = 'pages/Order';
 		$this->load->view('template/main', $data);
 	}
 	public function select($get)
@@ -24,13 +24,13 @@ class Order extends CI_Controller {
 			$data['page'] = 'Order Here'; 
 			$data['kategori'] = $this->model->getAll('menu_grup')->result();
 			$data['item'] = $this->model->getMenu()->result();
-			$data['content'] = 'pages/OrderCobaAjax';
+			$data['content'] = 'pages/Order';
 			$this->load->view('template/main', $data);
 		} else {
 			$data['page'] = 'Order Here'; 
 			$data['kategori'] = $this->model->getAll('menu_grup')->result();
 			$data['item'] = $this->model->getData('menu', ['id_group' => $get])->result();
-			$data['content'] = 'pages/OrderCobaAjax';
+			$data['content'] = 'pages/Order';
 			$this->load->view('template/main', $data);
 		}
 	}
